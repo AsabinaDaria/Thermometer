@@ -1,0 +1,950 @@
+
+My_thermometer.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000003c4  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  00800060  000003c4  00000438  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .stab         000006cc  00000000  00000000  00000438  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  3 .stabstr      00000085  00000000  00000000  00000b04  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_aranges 00000100  00000000  00000000  00000b90  2**3
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   00000fdd  00000000  00000000  00000c90  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 000004f3  00000000  00000000  00001c6d  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   000009c6  00000000  00000000  00002160  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  00000218  00000000  00000000  00002b28  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    0000025e  00000000  00000000  00002d40  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    00000496  00000000  00000000  00002f9e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	12 c0       	rjmp	.+36     	; 0x26 <__ctors_end>
+   2:	2c c0       	rjmp	.+88     	; 0x5c <__bad_interrupt>
+   4:	2b c0       	rjmp	.+86     	; 0x5c <__bad_interrupt>
+   6:	2a c0       	rjmp	.+84     	; 0x5c <__bad_interrupt>
+   8:	29 c0       	rjmp	.+82     	; 0x5c <__bad_interrupt>
+   a:	28 c0       	rjmp	.+80     	; 0x5c <__bad_interrupt>
+   c:	27 c0       	rjmp	.+78     	; 0x5c <__bad_interrupt>
+   e:	26 c0       	rjmp	.+76     	; 0x5c <__bad_interrupt>
+  10:	25 c0       	rjmp	.+74     	; 0x5c <__bad_interrupt>
+  12:	24 c0       	rjmp	.+72     	; 0x5c <__bad_interrupt>
+  14:	23 c0       	rjmp	.+70     	; 0x5c <__bad_interrupt>
+  16:	22 c0       	rjmp	.+68     	; 0x5c <__bad_interrupt>
+  18:	21 c0       	rjmp	.+66     	; 0x5c <__bad_interrupt>
+  1a:	20 c0       	rjmp	.+64     	; 0x5c <__bad_interrupt>
+  1c:	1f c0       	rjmp	.+62     	; 0x5c <__bad_interrupt>
+  1e:	1e c0       	rjmp	.+60     	; 0x5c <__bad_interrupt>
+  20:	1d c0       	rjmp	.+58     	; 0x5c <__bad_interrupt>
+  22:	1c c0       	rjmp	.+56     	; 0x5c <__bad_interrupt>
+  24:	1b c0       	rjmp	.+54     	; 0x5c <__bad_interrupt>
+
+00000026 <__ctors_end>:
+  26:	11 24       	eor	r1, r1
+  28:	1f be       	out	0x3f, r1	; 63
+  2a:	cf e5       	ldi	r28, 0x5F	; 95
+  2c:	d4 e0       	ldi	r29, 0x04	; 4
+  2e:	de bf       	out	0x3e, r29	; 62
+  30:	cd bf       	out	0x3d, r28	; 61
+
+00000032 <__do_copy_data>:
+  32:	10 e0       	ldi	r17, 0x00	; 0
+  34:	a0 e6       	ldi	r26, 0x60	; 96
+  36:	b0 e0       	ldi	r27, 0x00	; 0
+  38:	e4 ec       	ldi	r30, 0xC4	; 196
+  3a:	f3 e0       	ldi	r31, 0x03	; 3
+  3c:	02 c0       	rjmp	.+4      	; 0x42 <__SREG__+0x3>
+  3e:	05 90       	lpm	r0, Z+
+  40:	0d 92       	st	X+, r0
+  42:	a0 36       	cpi	r26, 0x60	; 96
+  44:	b1 07       	cpc	r27, r17
+  46:	d9 f7       	brne	.-10     	; 0x3e <__SP_H__>
+
+00000048 <__do_clear_bss>:
+  48:	10 e0       	ldi	r17, 0x00	; 0
+  4a:	a0 e6       	ldi	r26, 0x60	; 96
+  4c:	b0 e0       	ldi	r27, 0x00	; 0
+  4e:	01 c0       	rjmp	.+2      	; 0x52 <.do_clear_bss_start>
+
+00000050 <.do_clear_bss_loop>:
+  50:	1d 92       	st	X+, r1
+
+00000052 <.do_clear_bss_start>:
+  52:	a0 36       	cpi	r26, 0x60	; 96
+  54:	b1 07       	cpc	r27, r17
+  56:	e1 f7       	brne	.-8      	; 0x50 <.do_clear_bss_loop>
+  58:	3d d1       	rcall	.+634    	; 0x2d4 <main>
+  5a:	b2 c1       	rjmp	.+868    	; 0x3c0 <_exit>
+
+0000005c <__bad_interrupt>:
+  5c:	d1 cf       	rjmp	.-94     	; 0x0 <__vectors>
+
+0000005e <dt_testdevice>:
+﻿#include "DS18B20.h"
+
+//функция определения датчика на шине
+char dt_testdevice(void) //dt - digital termomether | определим, есть ли устройство на шине
+{
+	char stektemp=SREG;// сохраним значение стека
+  5e:	8f b7       	in	r24, 0x3f	; 63
+	cli(); //запрещаем прерывание
+  60:	f8 94       	cli
+	char dt;
+	DDRTEMP |= 1<<BITTEMP; //притягиваем шину
+  62:	89 9a       	sbi	0x11, 1	; 17
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+  64:	e9 ec       	ldi	r30, 0xC9	; 201
+  66:	f3 e0       	ldi	r31, 0x03	; 3
+  68:	31 97       	sbiw	r30, 0x01	; 1
+  6a:	f1 f7       	brne	.-4      	; 0x68 <dt_testdevice+0xa>
+  6c:	00 c0       	rjmp	.+0      	; 0x6e <dt_testdevice+0x10>
+  6e:	00 00       	nop
+	_delay_us(485); //задержка как минимум на 480 микросекунд
+	DDRTEMP &= ~(1<<BITTEMP); //отпускаем шину
+  70:	89 98       	cbi	0x11, 1	; 17
+  72:	fd ea       	ldi	r31, 0xAD	; 173
+  74:	fa 95       	dec	r31
+  76:	f1 f7       	brne	.-4      	; 0x74 <dt_testdevice+0x16>
+  78:	00 00       	nop
+	_delay_us(65); //задержка как максимум на 60 микросекунд
+	if ((PINTEMP & (1<<BITTEMP))==0)//проверяем, ответит ли устройство
+  7a:	90 b3       	in	r25, 0x10	; 16
+	{
+		dt=1;//устройство есть
+	} 
+	else dt=0;//устройства нет
+	SREG = stektemp;// вернем значение стека
+  7c:	8f bf       	out	0x3f, r24	; 63
+  7e:	e7 e4       	ldi	r30, 0x47	; 71
+  80:	f3 e0       	ldi	r31, 0x03	; 3
+  82:	31 97       	sbiw	r30, 0x01	; 1
+  84:	f1 f7       	brne	.-4      	; 0x82 <dt_testdevice+0x24>
+  86:	00 c0       	rjmp	.+0      	; 0x88 <dt_testdevice+0x2a>
+  88:	00 00       	nop
+	_delay_us(485); //задержка как минимум на 480 микросекунд
+	DDRTEMP &= ~(1<<BITTEMP); //отпускаем шину
+	_delay_us(65); //задержка как максимум на 60 микросекунд
+	if ((PINTEMP & (1<<BITTEMP))==0)//проверяем, ответит ли устройство
+	{
+		dt=1;//устройство есть
+  8a:	81 e0       	ldi	r24, 0x01	; 1
+  8c:	91 fd       	sbrc	r25, 1
+  8e:	80 e0       	ldi	r24, 0x00	; 0
+	} 
+	else dt=0;//устройства нет
+	SREG = stektemp;// вернем значение стека
+	_delay_us(420); //задержка как минимум на 480 микросекунд, но хватит и 420, тк это с учетом времени прошедших команд
+	return dt; //вернем результат
+}
+  90:	08 95       	ret
+
+00000092 <dt_sendbit>:
+
+
+//функция записи бита на устройство
+void dt_sendbit(char bt)
+{
+	char stektemp=SREG;// сохраним значение стека
+  92:	9f b7       	in	r25, 0x3f	; 63
+	cli(); //запрещаем прерывание
+  94:	f8 94       	cli
+	DDRTEMP |= 1<<BITTEMP; //притягиваем шину
+  96:	89 9a       	sbi	0x11, 1	; 17
+  98:	25 e0       	ldi	r18, 0x05	; 5
+  9a:	2a 95       	dec	r18
+  9c:	f1 f7       	brne	.-4      	; 0x9a <dt_sendbit+0x8>
+  9e:	00 00       	nop
+	_delay_us(2); //задержка как минимум на 2 микросекунды
+	if(bt)
+  a0:	81 11       	cpse	r24, r1
+		DDRTEMP &= ~(1<<BITTEMP); //отпускаем шину
+  a2:	89 98       	cbi	0x11, 1	; 17
+  a4:	8d ea       	ldi	r24, 0xAD	; 173
+  a6:	8a 95       	dec	r24
+  a8:	f1 f7       	brne	.-4      	; 0xa6 <dt_sendbit+0x14>
+  aa:	00 00       	nop
+	_delay_us(65); //задержка как минимум на 60 микросекунд
+	DDRTEMP &= ~(1<<BITTEMP); //отпускаем шину
+  ac:	89 98       	cbi	0x11, 1	; 17
+	SREG = stektemp;// вернем значение стека
+  ae:	9f bf       	out	0x3f, r25	; 63
+}
+  b0:	08 95       	ret
+
+000000b2 <dt_sendbyte>:
+//функция записи байта на устройство
+void dt_sendbyte(unsigned char bt)
+{
+  b2:	ef 92       	push	r14
+  b4:	ff 92       	push	r15
+  b6:	0f 93       	push	r16
+  b8:	1f 93       	push	r17
+  ba:	cf 93       	push	r28
+  bc:	df 93       	push	r29
+  be:	00 e0       	ldi	r16, 0x00	; 0
+  c0:	10 e0       	ldi	r17, 0x00	; 0
+	char i;		
+	for(i=0;i<8;i++)//посылаем отдельно каждый бит на устройство
+	{
+		if((bt & (1<<i)) == 1<<i)//посылаем 1
+  c2:	ee 24       	eor	r14, r14
+  c4:	ff 24       	eor	r15, r15
+  c6:	e3 94       	inc	r14
+  c8:	c8 2f       	mov	r28, r24
+  ca:	d0 e0       	ldi	r29, 0x00	; 0
+  cc:	c7 01       	movw	r24, r14
+  ce:	00 2e       	mov	r0, r16
+  d0:	02 c0       	rjmp	.+4      	; 0xd6 <dt_sendbyte+0x24>
+  d2:	88 0f       	add	r24, r24
+  d4:	99 1f       	adc	r25, r25
+  d6:	0a 94       	dec	r0
+  d8:	e2 f7       	brpl	.-8      	; 0xd2 <dt_sendbyte+0x20>
+  da:	9c 01       	movw	r18, r24
+  dc:	2c 23       	and	r18, r28
+  de:	3d 23       	and	r19, r29
+  e0:	82 17       	cp	r24, r18
+  e2:	93 07       	cpc	r25, r19
+  e4:	19 f4       	brne	.+6      	; 0xec <dt_sendbyte+0x3a>
+			dt_sendbit(1);
+  e6:	81 e0       	ldi	r24, 0x01	; 1
+  e8:	d4 df       	rcall	.-88     	; 0x92 <dt_sendbit>
+  ea:	02 c0       	rjmp	.+4      	; 0xf0 <dt_sendbyte+0x3e>
+		else //посылаем 0
+			dt_sendbit(0);
+  ec:	80 e0       	ldi	r24, 0x00	; 0
+  ee:	d1 df       	rcall	.-94     	; 0x92 <dt_sendbit>
+  f0:	0f 5f       	subi	r16, 0xFF	; 255
+  f2:	1f 4f       	sbci	r17, 0xFF	; 255
+}
+//функция записи байта на устройство
+void dt_sendbyte(unsigned char bt)
+{
+	char i;		
+	for(i=0;i<8;i++)//посылаем отдельно каждый бит на устройство
+  f4:	08 30       	cpi	r16, 0x08	; 8
+  f6:	11 05       	cpc	r17, r1
+  f8:	49 f7       	brne	.-46     	; 0xcc <dt_sendbyte+0x1a>
+		if((bt & (1<<i)) == 1<<i)//посылаем 1
+			dt_sendbit(1);
+		else //посылаем 0
+			dt_sendbit(0);
+	}	
+}
+  fa:	df 91       	pop	r29
+  fc:	cf 91       	pop	r28
+  fe:	1f 91       	pop	r17
+ 100:	0f 91       	pop	r16
+ 102:	ff 90       	pop	r15
+ 104:	ef 90       	pop	r14
+ 106:	08 95       	ret
+
+00000108 <dt_readbit>:
+
+//функция чтения бита с устройства
+char dt_readbit(void)
+{
+	char stektemp=SREG;// сохраним значение стека
+ 108:	9f b7       	in	r25, 0x3f	; 63
+	cli(); //запрещаем прерывание
+ 10a:	f8 94       	cli
+	char bt; //переменная хранения бита
+	DDRTEMP |= 1<<BITTEMP; //притягиваем шину
+ 10c:	89 9a       	sbi	0x11, 1	; 17
+ 10e:	25 e0       	ldi	r18, 0x05	; 5
+ 110:	2a 95       	dec	r18
+ 112:	f1 f7       	brne	.-4      	; 0x110 <dt_readbit+0x8>
+ 114:	00 00       	nop
+	_delay_us(2); //задержка как минимум на 2 микросекунды
+	DDRTEMP &= ~(1<<BITTEMP); //отпускаем шину
+ 116:	89 98       	cbi	0x11, 1	; 17
+ 118:	82 e2       	ldi	r24, 0x22	; 34
+ 11a:	8a 95       	dec	r24
+ 11c:	f1 f7       	brne	.-4      	; 0x11a <dt_readbit+0x12>
+ 11e:	00 c0       	rjmp	.+0      	; 0x120 <dt_readbit+0x18>
+	_delay_us(13);
+	bt = (PINTEMP & (1<<BITTEMP))>>BITTEMP; //читаем бит
+ 120:	80 b3       	in	r24, 0x10	; 16
+ 122:	28 e7       	ldi	r18, 0x78	; 120
+ 124:	2a 95       	dec	r18
+ 126:	f1 f7       	brne	.-4      	; 0x124 <dt_readbit+0x1c>
+	_delay_us(45);
+	SREG = stektemp;// вернем значение стека
+ 128:	9f bf       	out	0x3f, r25	; 63
+	char bt; //переменная хранения бита
+	DDRTEMP |= 1<<BITTEMP; //притягиваем шину
+	_delay_us(2); //задержка как минимум на 2 микросекунды
+	DDRTEMP &= ~(1<<BITTEMP); //отпускаем шину
+	_delay_us(13);
+	bt = (PINTEMP & (1<<BITTEMP))>>BITTEMP; //читаем бит
+ 12a:	90 e0       	ldi	r25, 0x00	; 0
+ 12c:	82 70       	andi	r24, 0x02	; 2
+ 12e:	90 70       	andi	r25, 0x00	; 0
+ 130:	95 95       	asr	r25
+ 132:	87 95       	ror	r24
+	_delay_us(45);
+	SREG = stektemp;// вернем значение стека
+	return bt; //вернем результат
+}
+ 134:	08 95       	ret
+
+00000136 <dt_readbyte>:
+
+//функция чтения байта с устройства
+unsigned char dt_readbyte(void)
+{
+ 136:	1f 93       	push	r17
+ 138:	cf 93       	push	r28
+ 13a:	df 93       	push	r29
+ 13c:	c0 e0       	ldi	r28, 0x00	; 0
+ 13e:	d0 e0       	ldi	r29, 0x00	; 0
+	char c=0;
+ 140:	10 e0       	ldi	r17, 0x00	; 0
+	char i;
+	for(i=0;i<8;i++)
+		c|=dt_readbit()<<i; //читаем бит
+ 142:	e2 df       	rcall	.-60     	; 0x108 <dt_readbit>
+ 144:	90 e0       	ldi	r25, 0x00	; 0
+ 146:	0c 2e       	mov	r0, r28
+ 148:	02 c0       	rjmp	.+4      	; 0x14e <dt_readbyte+0x18>
+ 14a:	88 0f       	add	r24, r24
+ 14c:	99 1f       	adc	r25, r25
+ 14e:	0a 94       	dec	r0
+ 150:	e2 f7       	brpl	.-8      	; 0x14a <dt_readbyte+0x14>
+ 152:	18 2b       	or	r17, r24
+ 154:	21 96       	adiw	r28, 0x01	; 1
+//функция чтения байта с устройства
+unsigned char dt_readbyte(void)
+{
+	char c=0;
+	char i;
+	for(i=0;i<8;i++)
+ 156:	c8 30       	cpi	r28, 0x08	; 8
+ 158:	d1 05       	cpc	r29, r1
+ 15a:	99 f7       	brne	.-26     	; 0x142 <dt_readbyte+0xc>
+		c|=dt_readbit()<<i; //читаем бит
+	return c;
+}
+ 15c:	81 2f       	mov	r24, r17
+ 15e:	df 91       	pop	r29
+ 160:	cf 91       	pop	r28
+ 162:	1f 91       	pop	r17
+ 164:	08 95       	ret
+
+00000166 <dt_check>:
+
+//функция преобразования показаний датчика в температуру
+int dt_check(void)
+{
+ 166:	cf 93       	push	r28
+	unsigned char bt;//переменная для считывания байта
+	unsigned int tt=0;
+	if(dt_testdevice()==1) //если устройство нашлось
+ 168:	7a df       	rcall	.-268    	; 0x5e <dt_testdevice>
+ 16a:	81 30       	cpi	r24, 0x01	; 1
+ 16c:	e1 f4       	brne	.+56     	; 0x1a6 <dt_check+0x40>
+	{
+		dt_sendbyte(NOID); //пропустить идентификацию, тк у нас только одно устройство на шине
+ 16e:	8c ec       	ldi	r24, 0xCC	; 204
+ 170:	a0 df       	rcall	.-192    	; 0xb2 <dt_sendbyte>
+		dt_sendbyte(T_CONVERT); //измеряем температуру
+ 172:	84 e4       	ldi	r24, 0x44	; 68
+ 174:	9e df       	rcall	.-196    	; 0xb2 <dt_sendbyte>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 176:	8f e7       	ldi	r24, 0x7F	; 127
+ 178:	9f e4       	ldi	r25, 0x4F	; 79
+ 17a:	a2 e1       	ldi	r26, 0x12	; 18
+ 17c:	81 50       	subi	r24, 0x01	; 1
+ 17e:	90 40       	sbci	r25, 0x00	; 0
+ 180:	a0 40       	sbci	r26, 0x00	; 0
+ 182:	e1 f7       	brne	.-8      	; 0x17c <dt_check+0x16>
+ 184:	00 c0       	rjmp	.+0      	; 0x186 <dt_check+0x20>
+ 186:	00 00       	nop
+		_delay_ms(750); //в 12битном режиме преобразования - 750 милисекунд
+		dt_testdevice(); //снова используем  те же манипуляции с шиной что и при проверке ее присутствия
+ 188:	6a df       	rcall	.-300    	; 0x5e <dt_testdevice>
+		dt_sendbyte(NOID); //пропустить идентификацию, тк у нас только одно устройство на шине
+ 18a:	8c ec       	ldi	r24, 0xCC	; 204
+ 18c:	92 df       	rcall	.-220    	; 0xb2 <dt_sendbyte>
+		dt_sendbyte(READ_DATA); //даем команду на чтение данных с устройства
+ 18e:	8e eb       	ldi	r24, 0xBE	; 190
+ 190:	90 df       	rcall	.-224    	; 0xb2 <dt_sendbyte>
+		bt = dt_readbyte(); //читаем младший бит
+ 192:	d1 df       	rcall	.-94     	; 0x136 <dt_readbyte>
+ 194:	c8 2f       	mov	r28, r24
+		tt = dt_readbyte(); //читаем старший бит MS
+ 196:	cf df       	rcall	.-98     	; 0x136 <dt_readbyte>
+		tt = (tt<<8)|bt;//сдвигаем старший влево, младший пишем на его место, тем самым получаем общий результат
+ 198:	38 2f       	mov	r19, r24
+ 19a:	20 e0       	ldi	r18, 0x00	; 0
+ 19c:	8c 2f       	mov	r24, r28
+ 19e:	90 e0       	ldi	r25, 0x00	; 0
+ 1a0:	82 2b       	or	r24, r18
+ 1a2:	93 2b       	or	r25, r19
+ 1a4:	02 c0       	rjmp	.+4      	; 0x1aa <dt_check+0x44>
+
+//функция преобразования показаний датчика в температуру
+int dt_check(void)
+{
+	unsigned char bt;//переменная для считывания байта
+	unsigned int tt=0;
+ 1a6:	80 e0       	ldi	r24, 0x00	; 0
+ 1a8:	90 e0       	ldi	r25, 0x00	; 0
+		bt = dt_readbyte(); //читаем младший бит
+		tt = dt_readbyte(); //читаем старший бит MS
+		tt = (tt<<8)|bt;//сдвигаем старший влево, младший пишем на его место, тем самым получаем общий результат
+	}
+	return tt;
+}
+ 1aa:	cf 91       	pop	r28
+ 1ac:	08 95       	ret
+
+000001ae <converttemp>:
+
+//преобразование температуры в единицы
+char converttemp (unsigned int tt)
+{
+	char t = tt>>4;//сдвиг и отсечение части старшего байта
+ 1ae:	92 95       	swap	r25
+ 1b0:	82 95       	swap	r24
+ 1b2:	8f 70       	andi	r24, 0x0F	; 15
+ 1b4:	89 27       	eor	r24, r25
+ 1b6:	9f 70       	andi	r25, 0x0F	; 15
+ 1b8:	89 27       	eor	r24, r25
+	return t;
+ 1ba:	08 95       	ret
+
+000001bc <sendhalfbyte>:
+
+//----------------------------------------
+void sendhalfbyte(unsigned char c)
+{
+	c<<=4;
+	e1; //включаем линию Е
+ 1bc:	93 9a       	sbi	0x12, 3	; 18
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 1be:	95 e8       	ldi	r25, 0x85	; 133
+ 1c0:	9a 95       	dec	r25
+ 1c2:	f1 f7       	brne	.-4      	; 0x1c0 <sendhalfbyte+0x4>
+ 1c4:	00 00       	nop
+	_delay_us(50);
+	PORTD&=0b00001111; //стираем информацию на входах DB4-DB7, остальное не трогаем
+ 1c6:	92 b3       	in	r25, 0x12	; 18
+ 1c8:	9f 70       	andi	r25, 0x0F	; 15
+ 1ca:	92 bb       	out	0x12, r25	; 18
+	PORTD|=c;
+ 1cc:	92 b3       	in	r25, 0x12	; 18
+﻿#include "lcd.h"
+
+//----------------------------------------
+void sendhalfbyte(unsigned char c)
+{
+	c<<=4;
+ 1ce:	82 95       	swap	r24
+ 1d0:	80 7f       	andi	r24, 0xF0	; 240
+	e1; //включаем линию Е
+	_delay_us(50);
+	PORTD&=0b00001111; //стираем информацию на входах DB4-DB7, остальное не трогаем
+	PORTD|=c;
+ 1d2:	89 2b       	or	r24, r25
+ 1d4:	82 bb       	out	0x12, r24	; 18
+	e0; //выключаем линию Е
+ 1d6:	93 98       	cbi	0x12, 3	; 18
+ 1d8:	85 e8       	ldi	r24, 0x85	; 133
+ 1da:	8a 95       	dec	r24
+ 1dc:	f1 f7       	brne	.-4      	; 0x1da <sendhalfbyte+0x1e>
+ 1de:	00 00       	nop
+	_delay_us(50);
+}
+ 1e0:	08 95       	ret
+
+000001e2 <sendbyte>:
+//----------------------------------------
+void sendbyte(unsigned char c, unsigned char mode)
+{
+ 1e2:	cf 93       	push	r28
+ 1e4:	c8 2f       	mov	r28, r24
+	if (mode==0) rs0;
+ 1e6:	66 23       	and	r22, r22
+ 1e8:	11 f4       	brne	.+4      	; 0x1ee <sendbyte+0xc>
+ 1ea:	92 98       	cbi	0x12, 2	; 18
+ 1ec:	01 c0       	rjmp	.+2      	; 0x1f0 <sendbyte+0xe>
+	else         rs1;
+ 1ee:	92 9a       	sbi	0x12, 2	; 18
+	unsigned char hc=0;
+	hc=c>>4;
+	sendhalfbyte(hc); sendhalfbyte(c);
+ 1f0:	8c 2f       	mov	r24, r28
+ 1f2:	82 95       	swap	r24
+ 1f4:	8f 70       	andi	r24, 0x0F	; 15
+ 1f6:	e2 df       	rcall	.-60     	; 0x1bc <sendhalfbyte>
+ 1f8:	8c 2f       	mov	r24, r28
+ 1fa:	e0 df       	rcall	.-64     	; 0x1bc <sendhalfbyte>
+}
+ 1fc:	cf 91       	pop	r28
+ 1fe:	08 95       	ret
+
+00000200 <sendcharlcd>:
+//----------------------------------------
+void sendcharlcd(unsigned char c)
+{
+	sendbyte(c,1);
+ 200:	61 e0       	ldi	r22, 0x01	; 1
+ 202:	ef df       	rcall	.-34     	; 0x1e2 <sendbyte>
+}
+ 204:	08 95       	ret
+
+00000206 <setpos>:
+//----------------------------------------
+void setpos(unsigned char x, unsigned y)
+{
+	char adress;
+	adress=(0x40*y+x)|0b10000000;
+ 206:	62 95       	swap	r22
+ 208:	66 0f       	add	r22, r22
+ 20a:	66 0f       	add	r22, r22
+ 20c:	60 7c       	andi	r22, 0xC0	; 192
+ 20e:	86 0f       	add	r24, r22
+	sendbyte(adress, 0);
+ 210:	80 68       	ori	r24, 0x80	; 128
+ 212:	60 e0       	ldi	r22, 0x00	; 0
+ 214:	e6 df       	rcall	.-52     	; 0x1e2 <sendbyte>
+}
+ 216:	08 95       	ret
+
+00000218 <LCD_ini>:
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 218:	8f e2       	ldi	r24, 0x2F	; 47
+ 21a:	95 e7       	ldi	r25, 0x75	; 117
+ 21c:	01 97       	sbiw	r24, 0x01	; 1
+ 21e:	f1 f7       	brne	.-4      	; 0x21c <LCD_ini+0x4>
+ 220:	00 c0       	rjmp	.+0      	; 0x222 <LCD_ini+0xa>
+ 222:	00 00       	nop
+//----------------------------------------
+void LCD_ini(void)
+{
+	_delay_ms(15); //Ждем 15 мс (стр 45)
+	sendhalfbyte(0b00000011);
+ 224:	83 e0       	ldi	r24, 0x03	; 3
+ 226:	ca df       	rcall	.-108    	; 0x1bc <sendhalfbyte>
+ 228:	8f e3       	ldi	r24, 0x3F	; 63
+ 22a:	9f e1       	ldi	r25, 0x1F	; 31
+ 22c:	01 97       	sbiw	r24, 0x01	; 1
+ 22e:	f1 f7       	brne	.-4      	; 0x22c <LCD_ini+0x14>
+ 230:	00 c0       	rjmp	.+0      	; 0x232 <LCD_ini+0x1a>
+ 232:	00 00       	nop
+	_delay_ms(4);
+	sendhalfbyte(0b00000011);
+ 234:	83 e0       	ldi	r24, 0x03	; 3
+ 236:	c2 df       	rcall	.-124    	; 0x1bc <sendhalfbyte>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 238:	87 ec       	ldi	r24, 0xC7	; 199
+ 23a:	90 e0       	ldi	r25, 0x00	; 0
+ 23c:	01 97       	sbiw	r24, 0x01	; 1
+ 23e:	f1 f7       	brne	.-4      	; 0x23c <LCD_ini+0x24>
+ 240:	00 c0       	rjmp	.+0      	; 0x242 <LCD_ini+0x2a>
+ 242:	00 00       	nop
+	_delay_us(100);
+	sendhalfbyte(0b00000011);
+ 244:	83 e0       	ldi	r24, 0x03	; 3
+ 246:	ba df       	rcall	.-140    	; 0x1bc <sendhalfbyte>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 248:	8f ec       	ldi	r24, 0xCF	; 207
+ 24a:	97 e0       	ldi	r25, 0x07	; 7
+ 24c:	01 97       	sbiw	r24, 0x01	; 1
+ 24e:	f1 f7       	brne	.-4      	; 0x24c <LCD_ini+0x34>
+ 250:	00 c0       	rjmp	.+0      	; 0x252 <LCD_ini+0x3a>
+ 252:	00 00       	nop
+	_delay_ms(1);
+	sendhalfbyte(0b00000010);
+ 254:	82 e0       	ldi	r24, 0x02	; 2
+ 256:	b2 df       	rcall	.-156    	; 0x1bc <sendhalfbyte>
+ 258:	8f ec       	ldi	r24, 0xCF	; 207
+ 25a:	97 e0       	ldi	r25, 0x07	; 7
+ 25c:	01 97       	sbiw	r24, 0x01	; 1
+ 25e:	f1 f7       	brne	.-4      	; 0x25c <LCD_ini+0x44>
+ 260:	00 c0       	rjmp	.+0      	; 0x262 <LCD_ini+0x4a>
+ 262:	00 00       	nop
+	_delay_ms(1);
+	sendbyte(0b00101000, 0); //4бит-режим (DL=0) и 2 линии (N=1)
+ 264:	88 e2       	ldi	r24, 0x28	; 40
+ 266:	60 e0       	ldi	r22, 0x00	; 0
+ 268:	bc df       	rcall	.-136    	; 0x1e2 <sendbyte>
+ 26a:	8f ec       	ldi	r24, 0xCF	; 207
+ 26c:	97 e0       	ldi	r25, 0x07	; 7
+ 26e:	01 97       	sbiw	r24, 0x01	; 1
+ 270:	f1 f7       	brne	.-4      	; 0x26e <LCD_ini+0x56>
+ 272:	00 c0       	rjmp	.+0      	; 0x274 <LCD_ini+0x5c>
+ 274:	00 00       	nop
+	_delay_ms(1);
+	sendbyte(0b00001100, 0); //включаем изображение на дисплее (D=1), курсоры никакие не включаем (C=0, B=0)
+ 276:	8c e0       	ldi	r24, 0x0C	; 12
+ 278:	60 e0       	ldi	r22, 0x00	; 0
+ 27a:	b3 df       	rcall	.-154    	; 0x1e2 <sendbyte>
+ 27c:	8f ec       	ldi	r24, 0xCF	; 207
+ 27e:	97 e0       	ldi	r25, 0x07	; 7
+ 280:	01 97       	sbiw	r24, 0x01	; 1
+ 282:	f1 f7       	brne	.-4      	; 0x280 <LCD_ini+0x68>
+ 284:	00 c0       	rjmp	.+0      	; 0x286 <LCD_ini+0x6e>
+ 286:	00 00       	nop
+	_delay_ms(1);
+	sendbyte(0b00000110, 0); //курсор (хоть он у нас и невидимый) будет двигаться влево
+ 288:	86 e0       	ldi	r24, 0x06	; 6
+ 28a:	60 e0       	ldi	r22, 0x00	; 0
+ 28c:	aa df       	rcall	.-172    	; 0x1e2 <sendbyte>
+ 28e:	8f ec       	ldi	r24, 0xCF	; 207
+ 290:	97 e0       	ldi	r25, 0x07	; 7
+ 292:	01 97       	sbiw	r24, 0x01	; 1
+ 294:	f1 f7       	brne	.-4      	; 0x292 <LCD_ini+0x7a>
+ 296:	00 c0       	rjmp	.+0      	; 0x298 <LCD_ini+0x80>
+ 298:	00 00       	nop
+	_delay_ms(1);
+}
+ 29a:	08 95       	ret
+
+0000029c <clearlcd>:
+//----------------------------------------
+void clearlcd(void)
+{
+	sendbyte(0b00000001, 0);
+ 29c:	81 e0       	ldi	r24, 0x01	; 1
+ 29e:	60 e0       	ldi	r22, 0x00	; 0
+ 2a0:	a0 df       	rcall	.-192    	; 0x1e2 <sendbyte>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 2a2:	87 eb       	ldi	r24, 0xB7	; 183
+ 2a4:	9b e0       	ldi	r25, 0x0B	; 11
+ 2a6:	01 97       	sbiw	r24, 0x01	; 1
+ 2a8:	f1 f7       	brne	.-4      	; 0x2a6 <clearlcd+0xa>
+ 2aa:	00 c0       	rjmp	.+0      	; 0x2ac <clearlcd+0x10>
+ 2ac:	00 00       	nop
+	_delay_us(1500);
+}
+ 2ae:	08 95       	ret
+
+000002b0 <str_lcd>:
+//----------------------------------------
+void str_lcd (char str1[])
+{  
+ 2b0:	cf 93       	push	r28
+ 2b2:	df 93       	push	r29
+ 2b4:	ec 01       	movw	r28, r24
+	wchar_t n;
+	for(n=0;str1[n]!='\0';n++)
+ 2b6:	88 81       	ld	r24, Y
+ 2b8:	88 23       	and	r24, r24
+ 2ba:	29 f0       	breq	.+10     	; 0x2c6 <str_lcd+0x16>
+{
+	sendbyte(0b00000001, 0);
+	_delay_us(1500);
+}
+//----------------------------------------
+void str_lcd (char str1[])
+ 2bc:	21 96       	adiw	r28, 0x01	; 1
+{  
+	wchar_t n;
+	for(n=0;str1[n]!='\0';n++)
+	sendcharlcd(str1[n]);
+ 2be:	a0 df       	rcall	.-192    	; 0x200 <sendcharlcd>
+}
+//----------------------------------------
+void str_lcd (char str1[])
+{  
+	wchar_t n;
+	for(n=0;str1[n]!='\0';n++)
+ 2c0:	89 91       	ld	r24, Y+
+ 2c2:	88 23       	and	r24, r24
+ 2c4:	e1 f7       	brne	.-8      	; 0x2be <str_lcd+0xe>
+	sendcharlcd(str1[n]);
+}
+ 2c6:	df 91       	pop	r29
+ 2c8:	cf 91       	pop	r28
+ 2ca:	08 95       	ret
+
+000002cc <port_ini>:
+﻿#include "main.h"
+
+
+void port_ini(void)
+{
+	PORTD=0x00;
+ 2cc:	12 ba       	out	0x12, r1	; 18
+	DDRD=0xFF;
+ 2ce:	8f ef       	ldi	r24, 0xFF	; 255
+ 2d0:	81 bb       	out	0x11, r24	; 17
+}
+ 2d2:	08 95       	ret
+
+000002d4 <main>:
+
+int main(void)
+{
+	unsigned int tt=0; //переменная для хранения температуры
+	port_ini(); //Инициализируем порты
+ 2d4:	fb df       	rcall	.-10     	; 0x2cc <port_ini>
+	I2C_Init(); //Инициализируем шину I2C
+ 2d6:	32 d0       	rcall	.+100    	; 0x33c <I2C_Init>
+	LCD_ini();  //Инициализируем дисплей
+ 2d8:	9f df       	rcall	.-194    	; 0x218 <LCD_ini>
+	clearlcd(); //Очистим дисплей
+ 2da:	e0 df       	rcall	.-64     	; 0x29c <clearlcd>
+		tt = converttemp(dt_check()); //измеряем температуру
+		sendcharlcd('t');
+		sendcharlcd(' ');
+		sendcharlcd('=');
+		sendcharlcd(' ');
+		sendcharlcd(tt/10+0x30);//Преобразуем число в код числа
+ 2dc:	0a e0       	ldi	r16, 0x0A	; 10
+ 2de:	10 e0       	ldi	r17, 0x00	; 0
+	I2C_Init(); //Инициализируем шину I2C
+	LCD_ini();  //Инициализируем дисплей
+	clearlcd(); //Очистим дисплей
+	while(1)
+	{
+		I2C_SendByteByADDR(0,0b11010000);	//переходим на адрес 0
+ 2e0:	80 e0       	ldi	r24, 0x00	; 0
+ 2e2:	60 ed       	ldi	r22, 0xD0	; 208
+ 2e4:	3e d0       	rcall	.+124    	; 0x362 <I2C_SendByteByADDR>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 2e6:	8f ef       	ldi	r24, 0xFF	; 255
+ 2e8:	91 ee       	ldi	r25, 0xE1	; 225
+ 2ea:	a4 e0       	ldi	r26, 0x04	; 4
+ 2ec:	81 50       	subi	r24, 0x01	; 1
+ 2ee:	90 40       	sbci	r25, 0x00	; 0
+ 2f0:	a0 40       	sbci	r26, 0x00	; 0
+ 2f2:	e1 f7       	brne	.-8      	; 0x2ec <main+0x18>
+ 2f4:	00 c0       	rjmp	.+0      	; 0x2f6 <main+0x22>
+ 2f6:	00 00       	nop
+		_delay_ms(200);
+		I2C_StartCondition(); //Отправим условие START
+ 2f8:	24 d0       	rcall	.+72     	; 0x342 <I2C_StartCondition>
+		I2C_SendByte(0b11010001); //отправим в устройство бит чтения
+ 2fa:	81 ed       	ldi	r24, 0xD1	; 209
+ 2fc:	2b d0       	rcall	.+86     	; 0x354 <I2C_SendByte>
+		setpos(0,0); //Ставим курсор на начало координат
+ 2fe:	80 e0       	ldi	r24, 0x00	; 0
+ 300:	60 e0       	ldi	r22, 0x00	; 0
+ 302:	70 e0       	ldi	r23, 0x00	; 0
+ 304:	80 df       	rcall	.-256    	; 0x206 <setpos>
+		tt = converttemp(dt_check()); //измеряем температуру
+ 306:	2f df       	rcall	.-418    	; 0x166 <dt_check>
+ 308:	52 df       	rcall	.-348    	; 0x1ae <converttemp>
+ 30a:	c8 2f       	mov	r28, r24
+ 30c:	d0 e0       	ldi	r29, 0x00	; 0
+		sendcharlcd('t');
+ 30e:	84 e7       	ldi	r24, 0x74	; 116
+ 310:	77 df       	rcall	.-274    	; 0x200 <sendcharlcd>
+		sendcharlcd(' ');
+ 312:	80 e2       	ldi	r24, 0x20	; 32
+ 314:	75 df       	rcall	.-278    	; 0x200 <sendcharlcd>
+		sendcharlcd('=');
+ 316:	8d e3       	ldi	r24, 0x3D	; 61
+ 318:	73 df       	rcall	.-282    	; 0x200 <sendcharlcd>
+		sendcharlcd(' ');
+ 31a:	80 e2       	ldi	r24, 0x20	; 32
+ 31c:	71 df       	rcall	.-286    	; 0x200 <sendcharlcd>
+		sendcharlcd(tt/10+0x30);//Преобразуем число в код числа
+ 31e:	ce 01       	movw	r24, r28
+ 320:	b8 01       	movw	r22, r16
+ 322:	3a d0       	rcall	.+116    	; 0x398 <__udivmodhi4>
+ 324:	c8 2f       	mov	r28, r24
+ 326:	86 2f       	mov	r24, r22
+ 328:	80 5d       	subi	r24, 0xD0	; 208
+ 32a:	6a df       	rcall	.-300    	; 0x200 <sendcharlcd>
+		sendcharlcd(tt%10+0x30);//Преобразуем число в код числа
+ 32c:	8c 2f       	mov	r24, r28
+ 32e:	80 5d       	subi	r24, 0xD0	; 208
+ 330:	67 df       	rcall	.-306    	; 0x200 <sendcharlcd>
+		sendcharlcd('*');
+ 332:	8a e2       	ldi	r24, 0x2A	; 42
+ 334:	65 df       	rcall	.-310    	; 0x200 <sendcharlcd>
+		sendcharlcd('C');
+ 336:	83 e4       	ldi	r24, 0x43	; 67
+ 338:	63 df       	rcall	.-314    	; 0x200 <sendcharlcd>
+ 33a:	d2 cf       	rjmp	.-92     	; 0x2e0 <main+0xc>
+
+0000033c <I2C_Init>:
+﻿#include "twi.h"
+
+void I2C_Init (void)
+{
+	TWBR=0x20;//скорость передачи (при 8 мгц получается 100 кгц, что и необходимо для общения с ds1307)
+ 33c:	80 e2       	ldi	r24, 0x20	; 32
+ 33e:	80 b9       	out	0x00, r24	; 0
+}
+ 340:	08 95       	ret
+
+00000342 <I2C_StartCondition>:
+
+
+void I2C_StartCondition(void)
+{
+	TWCR = (1<<TWINT)|(1<<TWSTA)|(1<<TWEN);
+ 342:	84 ea       	ldi	r24, 0xA4	; 164
+ 344:	86 bf       	out	0x36, r24	; 54
+	while (!(TWCR & (1<<TWINT)));//подождем пока установится TWIN
+ 346:	06 b6       	in	r0, 0x36	; 54
+ 348:	07 fe       	sbrs	r0, 7
+ 34a:	fd cf       	rjmp	.-6      	; 0x346 <I2C_StartCondition+0x4>
+}
+ 34c:	08 95       	ret
+
+0000034e <I2C_StopCondition>:
+
+void I2C_StopCondition(void)
+{
+	TWCR = (1<<TWINT)|(1<<TWSTO)|(1<<TWEN);
+ 34e:	84 e9       	ldi	r24, 0x94	; 148
+ 350:	86 bf       	out	0x36, r24	; 54
+}
+ 352:	08 95       	ret
+
+00000354 <I2C_SendByte>:
+
+void I2C_SendByte(unsigned char c)
+{
+	TWDR = c;//запишем байт в регистр данных
+ 354:	83 b9       	out	0x03, r24	; 3
+	TWCR = (1<<TWINT)|(1<<TWEN);//включим передачу байта
+ 356:	84 e8       	ldi	r24, 0x84	; 132
+ 358:	86 bf       	out	0x36, r24	; 54
+	while (!(TWCR & (1<<TWINT)));//подождем пока установится TWIN
+ 35a:	06 b6       	in	r0, 0x36	; 54
+ 35c:	07 fe       	sbrs	r0, 7
+ 35e:	fd cf       	rjmp	.-6      	; 0x35a <I2C_SendByte+0x6>
+}
+ 360:	08 95       	ret
+
+00000362 <I2C_SendByteByADDR>:
+
+void I2C_SendByteByADDR(unsigned char c,unsigned char addr)
+{
+ 362:	cf 93       	push	r28
+ 364:	df 93       	push	r29
+ 366:	c8 2f       	mov	r28, r24
+ 368:	d6 2f       	mov	r29, r22
+	I2C_StartCondition(); // Отправим условие START
+ 36a:	eb df       	rcall	.-42     	; 0x342 <I2C_StartCondition>
+	I2C_SendByte(addr); // Отправим в шину адрес устройства + бит чтения-записи
+ 36c:	8d 2f       	mov	r24, r29
+ 36e:	f2 df       	rcall	.-28     	; 0x354 <I2C_SendByte>
+	I2C_SendByte(c);// Отправим байт данных
+ 370:	8c 2f       	mov	r24, r28
+ 372:	f0 df       	rcall	.-32     	; 0x354 <I2C_SendByte>
+	I2C_StopCondition();// Отправим условие STOP
+ 374:	ec df       	rcall	.-40     	; 0x34e <I2C_StopCondition>
+}
+ 376:	df 91       	pop	r29
+ 378:	cf 91       	pop	r28
+ 37a:	08 95       	ret
+
+0000037c <I2C_ReadByte>:
+
+unsigned char I2C_ReadByte(void)
+{
+	TWCR = (1<<TWINT)|(1<<TWEN)|(1<<TWEA);
+ 37c:	84 ec       	ldi	r24, 0xC4	; 196
+ 37e:	86 bf       	out	0x36, r24	; 54
+	while (!(TWCR & (1<<TWINT)));//ожидание установки бита TWIN
+ 380:	06 b6       	in	r0, 0x36	; 54
+ 382:	07 fe       	sbrs	r0, 7
+ 384:	fd cf       	rjmp	.-6      	; 0x380 <I2C_ReadByte+0x4>
+	return TWDR;//читаем регистр данных
+ 386:	83 b1       	in	r24, 0x03	; 3
+}
+ 388:	08 95       	ret
+
+0000038a <I2C_ReadLastByte>:
+
+unsigned char I2C_ReadLastByte(void)
+{
+	TWCR = (1<<TWINT)|(1<<TWEN);
+ 38a:	84 e8       	ldi	r24, 0x84	; 132
+ 38c:	86 bf       	out	0x36, r24	; 54
+	while (!(TWCR & (1<<TWINT)));//ожидание установки бита TWIN
+ 38e:	06 b6       	in	r0, 0x36	; 54
+ 390:	07 fe       	sbrs	r0, 7
+ 392:	fd cf       	rjmp	.-6      	; 0x38e <I2C_ReadLastByte+0x4>
+	return TWDR;//читаем регистр данных
+ 394:	83 b1       	in	r24, 0x03	; 3
+ 396:	08 95       	ret
+
+00000398 <__udivmodhi4>:
+ 398:	aa 1b       	sub	r26, r26
+ 39a:	bb 1b       	sub	r27, r27
+ 39c:	51 e1       	ldi	r21, 0x11	; 17
+ 39e:	07 c0       	rjmp	.+14     	; 0x3ae <__udivmodhi4_ep>
+
+000003a0 <__udivmodhi4_loop>:
+ 3a0:	aa 1f       	adc	r26, r26
+ 3a2:	bb 1f       	adc	r27, r27
+ 3a4:	a6 17       	cp	r26, r22
+ 3a6:	b7 07       	cpc	r27, r23
+ 3a8:	10 f0       	brcs	.+4      	; 0x3ae <__udivmodhi4_ep>
+ 3aa:	a6 1b       	sub	r26, r22
+ 3ac:	b7 0b       	sbc	r27, r23
+
+000003ae <__udivmodhi4_ep>:
+ 3ae:	88 1f       	adc	r24, r24
+ 3b0:	99 1f       	adc	r25, r25
+ 3b2:	5a 95       	dec	r21
+ 3b4:	a9 f7       	brne	.-22     	; 0x3a0 <__udivmodhi4_loop>
+ 3b6:	80 95       	com	r24
+ 3b8:	90 95       	com	r25
+ 3ba:	bc 01       	movw	r22, r24
+ 3bc:	cd 01       	movw	r24, r26
+ 3be:	08 95       	ret
+
+000003c0 <_exit>:
+ 3c0:	f8 94       	cli
+
+000003c2 <__stop_program>:
+ 3c2:	ff cf       	rjmp	.-2      	; 0x3c2 <__stop_program>
